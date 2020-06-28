@@ -115,16 +115,16 @@ echo -e "\nInstalling Mosaic version "$MOSAICVERSION" for "$LINUX_DISTRO"\n"
 if [ "$LINUX_DISTRO" == "Ubuntu" ]; then
   apt update
   apt install git curl ffmpeg wget libpython2.7-dev libpython3.8-dev libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
-else if [ "$LINUX_DISTRO" == "Linux Mint" ]; then
+elif [ "$LINUX_DISTRO" == "Linux Mint" ]; then
   apt update
   apt install git curl ffmpeg wget libpython2.7-dev libpython3.8-dev libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
-else if [ "$LINUX_DISTRO" == "Debian" ]; then
+elif [ "$LINUX_DISTRO" == "Debian" ]; then
   apt update
   apt install git curl ffmpeg wget libpython2.7-dev libpython3.8-dev rsync libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
-else if [ "$LINUX_DISTRO" == "Arch Linux" ]; then
+elif [ "$LINUX_DISTRO" == "Arch Linux" ]; then
   pacman -Syu
   pacman -Syu base-devel python python2 git curl ffmpeg wget rsync snappy nano
-else if [ "$LINUX_DISTRO" == "Fedora" ]; then
+elif [ "$LINUX_DISTRO" == "Fedora" ]; then
   dnf update
   dnf install nano make git curl ffmpeg wget python2-libs python2-devel python3-libs python3-devel
 fi
@@ -144,18 +144,18 @@ if [ ! -d $OFFOLDERNAME ]; then
   echo -e "\nInstalling openFrameworks dependencies"
   if [ "$LINUX_DISTRO" == "Ubuntu" ]; then
     cd $INSTALLFOLDER/$OFFOLDERNAME/scripts/linux/ubuntu
-  else if [ "$LINUX_DISTRO" == "Linux Mint" ]; then
+  elif [ "$LINUX_DISTRO" == "Linux Mint" ]; then
     cd $INSTALLFOLDER/$OFFOLDERNAME/scripts/linux/ubuntu
-  else if [ "$LINUX_DISTRO" == "Debian" ]; then
+  elif [ "$LINUX_DISTRO" == "Debian" ]; then
     cd $INSTALLFOLDER/$OFFOLDERNAME/scripts/linux/debian
     DEBIAN_VERSION="$( cat /etc/debian_version | cut -d . -f 1 )"
     if [ $DEBIAN_VERSION == "10" ]; then
       sed -i 's/libgles1-mesa-dev/libglvnd-dev/' install_dependencies.sh
     fi
-  else if [ "$LINUX_DISTRO" == "Arch Linux" ]; then
+  elif [ "$LINUX_DISTRO" == "Arch Linux" ]; then
     cd $INSTALLFOLDER/$OFFOLDERNAME/scripts/linux/archlinux
     sed -e 's.$ROOT/..g' -i install_dependencies.sh
-  else if [ "$LINUX_DISTRO" == "Fedora" ]; then
+  elif [ "$LINUX_DISTRO" == "Fedora" ]; then
     cd $INSTALLFOLDER/$OFFOLDERNAME/scripts/linux/fedora
   fi
   ./install_dependencies.sh -y
@@ -186,7 +186,7 @@ if [ "$LINUX_DISTRO" == "Arch Linux" ]; then
   if [ ! -e /usr/lib/pkgconfig/python.pc ]; then
     ln -s /usr/lib/pkgconfig/python2.pc /usr/lib/pkgconfig/python.pc
   fi
-else if [ "$LINUX_DISTRO" == "Fedora" ]; then
+elif [ "$LINUX_DISTRO" == "Fedora" ]; then
   if [ ! -e /usr/lib64/pkgconfig/python.pc ]; then
     ln -s /usr/lib64/pkgconfig/python-2.7.pc /usr/lib64/pkgconfig/python.pc
   fi
