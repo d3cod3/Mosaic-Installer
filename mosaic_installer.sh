@@ -125,6 +125,8 @@ elif [ "$LINUX_DISTRO" == "Arch Linux" ]; then
   pacman -Syu
   pacman -Syu base-devel python python2 git curl ffmpeg wget rsync snappy nano
 elif [ "$LINUX_DISTRO" == "Fedora" ]; then
+  dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+  dnf -y install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
   dnf update
   dnf install nano make git curl ffmpeg wget python2-libs python2-devel python3-libs python3-devel
 fi
@@ -437,11 +439,7 @@ if [ ! -e $INSTALLFOLDER/$OFFOLDERNAME/addons/ofxAudioAnalyzer/libs/fftw3f/lib/l
 	git clone --branch=master https://github.com/d3cod3/fftw3.3.2-source
 	cd fftw3.3.2-source
 	./configure --prefix=`pwd` --enable-float --enable-sse2 --with-incoming-stack-boundary=2 --with-our-malloc16 --disable-shared --enable-static
-  if [ "$LINUX_DISTRO" == "Arch Linux" ]; then
-    make MAKEINFO=true -j$NUMPU
-  else
-    make -j$NUMPU
-  fi
+  make MAKEINFO=true -j$NUMPU
 	cd .libs
 	mkdir $INSTALLFOLDER/$OFFOLDERNAME/addons/ofxAudioAnalyzer/libs/fftw3f/lib/linux64
 	cp libfftw3f.a $INSTALLFOLDER/$OFFOLDERNAME/addons/ofxAudioAnalyzer/libs/fftw3f/lib/linux64/
