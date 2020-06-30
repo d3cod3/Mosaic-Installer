@@ -49,10 +49,26 @@ OFFOLDERNAME=openFrameworks
 OFRELURL=https://openframeworks.cc/versions/v0.11.0/of_v0.11.0_msys2_release.zip
 OFRELFILENAME=of_v0.11.0_msys2_release.zip
 OFRELORIGINALNAME=of_v0.11.0_msys2_release
+
+INSTALL_OK="NO"
 ###############################################################################
 
 # 0 - print installer start_message
 start_message
+
+echo "Start Mosaic windows pre-compile install?"
+echo ""
+echo "[y/n]: "
+
+read n
+case $n in
+  y) INSTALL_OK="YES";;
+  n) INSTALL_OK="NO";;
+esac
+
+if [ "$INSTALL_OK" == "NO" ]; then
+  exit 0
+fi
 
 echo -e "\nInstalling Mosaic version "$MOSAICVERSION" for windows\n"
 
