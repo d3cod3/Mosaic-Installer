@@ -300,13 +300,6 @@ if [ -d d3cod3 ]; then
   sed -i '' -e "s/ofxPdExternals/ /g" addons.make
   sed -i '' -e "s/ofxPd/ /g" addons.make
   sed -i '' -e "s/ofxPython/ /g" addons.make
-  make -j2 Release
-  # copy all .o files in the same folder
-  mkdir tmpobj
-  cp obj/msys2/Release/src/*.o tmpobj/
-  find /opt/openFrameworks/addons/obj/msys2/Release/ -type f -name *.o -exec cp "{}" tmpobj/ \;
-  # customize link command to reduce arguments size to 32000 MAX
-
 else
   mkdir d3cod3
   cd d3cod3
@@ -317,5 +310,9 @@ else
   sed -i '' -e "s/ofxPdExternals/ /g" addons.make
   sed -i '' -e "s/ofxPd/ /g" addons.make
   sed -i '' -e "s/ofxPython/ /g" addons.make
-  make -j2 Release
 fi
+
+# 5 - Copy necessary dlls
+cp $INSTALLFOLDER/$OFFOLDERNAME/addons/ofxAudioAnalyzer/libs/fftw3f/lib/msys2/libfftw3f-3.dll $INSTALLFOLDER/$OFFOLDERNAME/apps/d3cod3/Mosaic/bin/
+
+echo -e "\nMosaic project ready to compile! \n\nInstall QT Creator 4.6.1 from\nhttp://download.qt.io/official_releases/qtcreator/\nthen open the Mosaic .qbs project and compile the Release!"
