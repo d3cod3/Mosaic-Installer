@@ -14,7 +14,7 @@ Bash scripts for automated Mosaic download/compile/install on Linux and windows 
 
 On Linux boxes the install process is fully automated, and right now is available for those distros:
 
-1. Ubuntu ( tested on different one starting from 16.04 )
+1. Ubuntu ( tested on different ones starting from 16.04 )
 2. Linux Mint
 3. Debian ( tested from debian 9 stretch )
 4. Arch Linux
