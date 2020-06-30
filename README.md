@@ -51,10 +51,14 @@ So, this is the resume in order:
 
 1. Download/Install (follow instructions, it's really straightforward) msys2 from here: https://www.msys2.org/
 2. Open msys2, we are going to use mingw 32 bit, so when asked ( you'll have 3 choices ) open the mingw 32 bit shell.
+
 ![screenshot](https://github.com/d3cod3/Mosaic-Installer/blob/master/img/mingw32.jpg)
+
 3. clone this repo: ``` git clone https://github.com/d3cod3/Mosaic-Installer ```
 4. Launch the windows install script: ``` cd Mosaic-Installer && ./mosaic_windows_installer.sh```
+
 ![screenshot](https://github.com/d3cod3/Mosaic-Installer/blob/master/img/shell.jpg)
+
 5. Wait some...
 6. When the script finish, you'll have everything ready for compile Mosaic, but due to some mingw compiler limitations, you'll need to compile it with QT Creator.
 7. Download/Install QT Creator 4.6.1 from here: http://download.qt.io/official_releases/qtcreator/
@@ -63,4 +67,5 @@ So, this is the resume in order:
 10. Compile the Release.
 
 That's it, when finished compiling, you'll find the Mosaic.exe app here: ``` C:\msys64\opt\openFrameworks\apps\d3cod3\Mosaic\bin/Mosaic.exe```
+
 Just open it and pin it to the taskbar.
