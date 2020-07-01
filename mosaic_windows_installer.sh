@@ -77,6 +77,10 @@ pacman -Syu --noconfirm --needed
 pacman -Syu git nano patch unzip --noconfirm
 
 # 2 - Download and Install openFrameworks
+if [ ! -d $INSTALLFOLDER ]; then
+  mkdir /opt
+fi
+
 cd $INSTALLFOLDER
 
 if [ ! -d $OFFOLDERNAME ]; then
