@@ -155,14 +155,6 @@ else
   git clone --branch=master https://github.com/kylemcdonald/ofxCv
 fi
 
-if [ -d ofxDatGui ]; then
-  echo -e "\nUpdating ofxDatGui addon..."
-  cd ofxDatGui && git checkout -- . && git pull && cd ..
-else
-  echo -e "\nCloning ofxDatGui addon..."
-  git clone --branch=master https://github.com/d3cod3/ofxDatGui
-fi
-
 if [ -d ofxEasing ]; then
   echo -e "\nUpdating ofxEasing addon..."
   cd ofxEasing && git checkout -- . && git pull && cd ..
@@ -193,14 +185,6 @@ if [ -d ofxGLEditor ]; then
 else
   echo -e "\nCloning ofxGLEditor addon..."
   git clone --branch=master https://github.com/d3cod3/ofxGLEditor
-fi
-
-if [ -d ofxHistoryPlot ]; then
-  echo -e "\nUpdating ofxHistoryPlot addon..."
-  cd ofxHistoryPlot && git checkout -- . && git pull && cd ..
-else
-  echo -e "\nCloning ofxHistoryPlot addon..."
-  git clone --branch=master https://github.com/armadillu/ofxHistoryPlot
 fi
 
 if [ -d ofxJSON ]; then
@@ -251,14 +235,6 @@ else
   git clone --branch=master https://github.com/d3cod3/ofxMtlMapping2D
 fi
 
-if [ -d ofxParagraph ]; then
-  echo -e "\nUpdating ofxParagraph addon..."
-  cd ofxParagraph && git checkout -- . && git pull && cd ..
-else
-  echo -e "\nCloning ofxParagraph addon..."
-  git clone --branch=master https://github.com/d3cod3/ofxParagraph
-fi
-
 if [ -d ofxPDSP ]; then
   echo -e "\nUpdating ofxPDSP addon..."
   cd ofxPDSP && git checkout -- . && git pull && cd ..
@@ -267,28 +243,12 @@ else
   git clone --branch=master https://github.com/npisanti/ofxPDSP
 fi
 
-if [ -d ofxThreadedFileDialog ]; then
-  echo -e "\nUpdating ofxThreadedFileDialog addon..."
-  cd ofxThreadedFileDialog && git checkout -- . && git pull && cd ..
-else
-  echo -e "\nCloning ofxThreadedFileDialog addon..."
-  git clone --branch=master https://github.com/d3cod3/ofxThreadedFileDialog
-fi
-
 if [ -d ofxTimeline ]; then
   echo -e "\nUpdating ofxTimeline addon..."
   cd ofxTimeline && git checkout -- . && git pull && cd ..
 else
   echo -e "\nCloning ofxTimeline addon..."
   git clone --branch=master https://github.com/d3cod3/ofxTimeline
-fi
-
-if [ -d ofxTimeMeasurements ]; then
-  echo -e "\nUpdating ofxTimeMeasurements addon..."
-  cd ofxTimeMeasurements && git checkout -- . && git pull && cd ..
-else
-  echo -e "\nCloning ofxTimeMeasurements addon..."
-  git clone --branch=master https://github.com/armadillu/ofxTimeMeasurements
 fi
 
 if [ -d ofxVisualProgramming ]; then
@@ -315,7 +275,6 @@ if [ -d d3cod3 ]; then
   rm -rf Mosaic
   git clone --recursive --branch=master https://github.com/d3cod3/Mosaic
   cd Mosaic
-  sed -i '' -e "s/ofxJava/ /g" addons.make
   sed -i '' -e "s/ofxNDI/ /g" addons.make
   sed -i '' -e "s/ofxPdExternals/ /g" addons.make
   sed -i '' -e "s/ofxPd/ /g" addons.make
@@ -325,7 +284,6 @@ else
   cd d3cod3
   git clone --recursive --branch=master https://github.com/d3cod3/Mosaic
   cd Mosaic
-  sed -i '' -e "s/ofxJava/ /g" addons.make
   sed -i '' -e "s/ofxNDI/ /g" addons.make
   sed -i '' -e "s/ofxPdExternals/ /g" addons.make
   sed -i '' -e "s/ofxPd/ /g" addons.make
