@@ -114,13 +114,13 @@ echo -e "\nInstalling Mosaic version "$MOSAICVERSION" for "$LINUX_DISTRO"\n"
 # 2 - Install dependencies
 if [ "$LINUX_DISTRO" == "Ubuntu" ]; then
   apt update
-  apt install git curl ffmpeg wget libpython2.7-dev libpython3.8-dev libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
+  apt install git curl ffmpeg wget libpython3.8-dev libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
 elif [ "$LINUX_DISTRO" == "Linux Mint" ]; then
   apt update
-  apt install git curl ffmpeg wget libpython2.7-dev libpython3.8-dev libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
+  apt install git curl ffmpeg wget libpython3.8-dev libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
 elif [ "$LINUX_DISTRO" == "Debian" ]; then
   apt update
-  apt install git curl ffmpeg wget libpython2.7-dev libpython3.8-dev rsync libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
+  apt install git curl ffmpeg wget libpython3.8-dev rsync libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
 elif [ "$LINUX_DISTRO" == "Arch Linux" ]; then
   pacman -Syu
   pacman -Syu base-devel python python2 git curl ffmpeg wget rsync snappy nano
@@ -128,7 +128,7 @@ elif [ "$LINUX_DISTRO" == "Fedora" ]; then
   dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
   dnf -y install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
   dnf update
-  dnf install nano make git curl ffmpeg wget python2-libs python2-devel python3-libs python3-devel
+  dnf install nano make git curl ffmpeg wget python3-libs python3-devel
 fi
 
 # 3 - Download and Install openFrameworks
@@ -184,17 +184,13 @@ if [ ! -d $OFFOLDERNAME ]; then
 fi
 
 # 4 - Fix python symbolic link for compiling
-if [ "$LINUX_DISTRO" == "Arch Linux" ]; then
-  if [ ! -e /usr/lib/pkgconfig/python.pc ]; then
-    ln -s /usr/lib/pkgconfig/python2.pc /usr/lib/pkgconfig/python.pc
-  fi
-elif [ "$LINUX_DISTRO" == "Fedora" ]; then
-  if [ ! -e /usr/lib64/pkgconfig/python.pc ]; then
-    ln -s /usr/lib64/pkgconfig/python-2.7.pc /usr/lib64/pkgconfig/python.pc
+if [ "$LINUX_DISTRO" == "Fedora" ]; then
+  if [ ! -e /usr/lib64/pkgconfig/python3.pc ]; then
+    ln -s /usr/lib64/pkgconfig/python-3.8.pc /usr/lib64/pkgconfig/python3.pc
   fi
 else
-  if [ ! -e /usr/lib/x86_64-linux-gnu/pkgconfig/python.pc ]; then
-    ln -s /usr/lib/x86_64-linux-gnu/pkgconfig/python-2.7.pc /usr/lib/x86_64-linux-gnu/pkgconfig/python.pc
+  if [ ! -e /usr/lib/x86_64-linux-gnu/pkgconfig/python3.pc ]; then
+    ln -s /usr/lib/x86_64-linux-gnu/pkgconfig/python-3.8.pc /usr/lib/x86_64-linux-gnu/pkgconfig/python3.pc
   fi
 fi
 
