@@ -354,7 +354,7 @@ if [ -d ofxPython ]; then
   cd ofxPython && git checkout -- . && git pull && cd ..
 else
   echo -e "\nCloning ofxPython addon..."
-  git clone --branch=OF0.9.8 https://github.com/d3cod3/ofxPython
+  git clone --branch=master https://github.com/d3cod3/ofxPython
 fi
 
 if [ -d ofxTimeline ]; then
