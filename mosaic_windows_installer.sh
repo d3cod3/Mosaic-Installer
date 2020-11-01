@@ -184,7 +184,7 @@ if [ -d ofxGLEditor ]; then
   cd ofxGLEditor && git checkout -- . && git pull && cd ..
 else
   echo -e "\nCloning ofxGLEditor addon..."
-  git clone --branch=master https://github.com/d3cod3/ofxGLEditor
+  git clone --branch=master https://github.com/Akira-Hayasaka/ofxGLEditor
 fi
 
 if [ -d ofxJSON ]; then
@@ -224,7 +224,7 @@ if [ -d ofxMidi ]; then
   cd ofxMidi && git checkout -- . && git pull && cd ..
 else
   echo -e "\nCloning ofxMidi addon..."
-  git clone --branch=master https://github.com/d3cod3/ofxMidi
+  git clone --branch=master https://github.com/danomatika/ofxMidi
 fi
 
 if [ -d ofxMtlMapping2D ]; then
