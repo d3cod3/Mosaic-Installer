@@ -56,12 +56,10 @@ if [ $(id -u) != 0 ]; then
     exit 1
 fi
 
-
 ###############################################################################
 # VARS
 USERHOME="$( echo ~ )"
 MOSAICDESKTOPFILE=Mosaic.desktop
-MOSAICVERSION="$( curl https://raw.githubusercontent.com/d3cod3/Mosaic/master/bin/data/release.txt )"
 LOCALUSERNAME="$( who | awk '{print $1}' )"
 INSTALLFOLDER=/opt
 OFFOLDERNAME=openFrameworks
@@ -109,7 +107,7 @@ if [ "$LINUX_DISTRO" == "" ]; then
   exit 0
 fi
 
-echo -e "\nInstalling Mosaic version "$MOSAICVERSION" for "$LINUX_DISTRO"\n"
+echo -e "\nInstalling Mosaic for "$LINUX_DISTRO"\n"
 
 # 2 - Install dependencies
 if [ "$LINUX_DISTRO" == "Ubuntu" ]; then
@@ -130,6 +128,8 @@ elif [ "$LINUX_DISTRO" == "Fedora" ]; then
   dnf update
   dnf install nano make git curl ffmpeg wget python3-libs python3-devel
 fi
+
+MOSAICVERSION="$( curl https://raw.githubusercontent.com/d3cod3/Mosaic/master/bin/data/release.txt )"
 
 # 3 - Download and Install openFrameworks
 cd $INSTALLFOLDER
