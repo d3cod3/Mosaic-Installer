@@ -396,11 +396,11 @@ if [ ! -e $INSTALLFOLDER/$OFFOLDERNAME/addons/ofxAudioAnalyzer/libs/fftw3f/lib/l
 fi
 
 # 7 - Copy libndi
-if [ ! -e /usr/lib/libndi.so.3.7.1 ]; then
-  echo -e "\nCopying libndi to /usr/lib"
+if [ ! -e /usr/local/lib/libndi.so.3.7.1 ]; then
+  echo -e "\nCopying libndi to /usr/local/lib"
   cd $INSTALLFOLDER
-  cp $OFFOLDERNAME/addons/ofxNDI/libs/libndi/lib/x86_64-linux-gnu/libndi.so.3.7.1 /usr/lib
-  ln -s /usr/lib/libndi.so.3.7.1 /usr/lib/libndi.so.3
+  cp $OFFOLDERNAME/addons/ofxNDI/libs/libndi/lib/x86_64-linux-gnu/libndi.so.3.7.1 /usr/local/lib
+  ln -s /usr/local/lib/libndi.so.3.7.1 /usr/lib/libndi.so.3
 fi
 
 # 8 - Clone and compile Mosaic
