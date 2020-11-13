@@ -82,7 +82,7 @@ mkdir OF/addons/ofxAudioAnalyzer/libs/fftw3f/lib/linux64
 cd .libs && cp libfftw3f.a OF/addons/ofxAudioAnalyzer/libs/fftw3f/lib/linux64/
 cd ../../ && rm -rf fftw3.3.2-source
 ```
-6. make -j3 Release cuold fails because the generated linker command can be too huge. If that's the case, compile Mosaic using qt-creator included Mosaic.qbs project. ( to install qt-creator follow this instructions here: https://openframeworks.cc/setup/qtcreator/ and be sure to download Qt Creator 4.6.1 )
+6. ```make -j3 Release``` could fail because the generated linker command can be too huge. If that's the case, compile Mosaic using qt-creator included Mosaic.qbs project. ( to install qt-creator follow this instructions here: https://openframeworks.cc/setup/qtcreator/ and be sure to download Qt Creator 4.6.1 )
 
 ### WINDOWS
 
