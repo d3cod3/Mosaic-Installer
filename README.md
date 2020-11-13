@@ -14,9 +14,9 @@ Bash scripts for automated Mosaic download/compile/install on Linux and windows 
 
 On Linux boxes the install process is fully automated, and right now is available for those distros:
 
-1. Ubuntu ( tested on different ones starting from 16.04 )
+1. Ubuntu ( tested on different ones starting from 16.04 to 20.04 )
 2. Linux Mint
-3. Debian ( tested from debian 9 stretch )
+3. Debian ( tested from debian 9 stretch to debian 10 buster)
 4. Arch Linux
 5. Fedora ( starting from Fedora 29 )
 
@@ -40,6 +40,49 @@ Wait some...
 When the script finish, you'll have Mosaic software appearing in your programs menus!
 
 > if your distro is not on the list, and you want to contribute to this repo, you are very welcome!
+
+#### Manual Install
+
+In case something goes wrong, or your distro has not been tested yet, here are the basic steps of the installer explained:
+
+1. Install of0.11.0 from the official openFrameworks page and follow the install instructions here: https://openframeworks.cc/setup/linux-install/
+2. Clone Mosaic with submodules:
+```bash
+cd OF/apps/ && mkdir mosaicApps && cd mosaicApps
+git clone https://github.com/d3cod3/Mosaic.git
+git submodule init && git submodule update
+```
+3. Update ofxAddonTool:
+```bash
+cd Mosaic/scripts/ofxAddonTool && git checkout master && git pull
+```
+4. Run ofxAddonTool:
+```bash
+./ofxAddonTool.sh --install
+```
+5. Install hooks from Mosaic Installer:
+```bash
+apt install git curl ffmpeg wget libpython3.8-dev libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
+```
+Python
+```bash
+ln -s /usr/lib/x86_64-linux-gnu/pkgconfig/python-3.8.pc /usr/lib/x86_64-linux-gnu/pkgconfig/python3.pc
+```
+NDI
+```bash
+sudo cp OF/addons/ofxNDI/libs/libndi/lib/x86_64-linux-gnu/libndi.so.3.7.1 /usr/local/lib && ln -s /usr/local/lib/libndi.so.3.7.1 /usr/lib/libndi.so.3
+```
+Fftw
+```bash
+git clone --branch=master https://github.com/d3cod3/fftw3.3.2-source
+cd fftw3.3.2-source
+./configure --prefix=pwd --enable-float --enable-sse2 --with-incoming-stack-boundary=2 --with-our-malloc16 --disable-shared --enable-static
+make MAKEINFO=true -j3
+mkdir OF/addons/ofxAudioAnalyzer/libs/fftw3f/lib/linux64
+cd .libs && cp libfftw3f.a OF/addons/ofxAudioAnalyzer/libs/fftw3f/lib/linux64/
+cd ../../ && rm -rf fftw3.3.2-source
+```
+6. make -j3 Release cuold fails because the generated linker command can be too huge. If that's the case, compile Mosaic using qt-creator included Mosaic.qbs project. ( to install qt-creator follow this instructions here: https://openframeworks.cc/setup/qtcreator/ and be sure to download Qt Creator 4.6.1 )
 
 ### WINDOWS
 
