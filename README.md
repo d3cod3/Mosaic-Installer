@@ -62,10 +62,22 @@ cd Mosaic/scripts/ofxAddonTool && git checkout master && git pull
 ```
 5. Install hooks from Mosaic Installer:
 ```bash
+# for debian based distros
 apt install git curl ffmpeg wget libpython3.8-dev libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
+# for Arch Linux
+pacman -Syu
+pacman -Syu base-devel python git curl ffmpeg wget rsync snappy nano
+# for Fedora
+dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+dnf -y install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+dnf update
+dnf install nano make git curl ffmpeg wget python3-libs python3-devel
 ```
 Python
 ```bash
+# Fedora
+ln -s /usr/lib64/pkgconfig/python-3.8.pc /usr/lib64/pkgconfig/python3.pc
+# Other distros
 ln -s /usr/lib/x86_64-linux-gnu/pkgconfig/python-3.8.pc /usr/lib/x86_64-linux-gnu/pkgconfig/python3.pc
 ```
 NDI
