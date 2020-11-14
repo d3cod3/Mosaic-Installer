@@ -121,7 +121,7 @@ elif [ "$LINUX_DISTRO" == "Debian" ]; then
   apt install git curl ffmpeg wget libpython3.8-dev rsync libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
 elif [ "$LINUX_DISTRO" == "Arch Linux" ]; then
   pacman -Syu
-  pacman -Syu base-devel python python2 git curl ffmpeg wget rsync snappy nano
+  pacman -Syu base-devel python git curl ffmpeg wget rsync snappy nano
 elif [ "$LINUX_DISTRO" == "Fedora" ]; then
   dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
   dnf -y install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
