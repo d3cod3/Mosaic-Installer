@@ -253,14 +253,6 @@ else
   git clone --branch=master https://github.com/d3cod3/ofxFFmpegRecorder
 fi
 
-if [ -d ofxFontStash ]; then
-  echo -e "\nUpdating ofxFontStash addon..."
-  cd ofxFontStash && git checkout -- . && git pull && cd ..
-else
-  echo -e "\nCloning ofxFontStash addon..."
-  git clone --branch=master https://github.com/d3cod3/ofxFontStash
-fi
-
 if [ -d ofxGLEditor ]; then
   echo -e "\nUpdating ofxGLEditor addon..."
   cd ofxGLEditor && git checkout -- . && git pull && cd ..
