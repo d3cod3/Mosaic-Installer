@@ -435,6 +435,7 @@ chown $LOCALUSERNAME:$LOCALUSERNAME -R $OFFOLDERNAME/
 # 11 - Create Mosaic Example folder in ~/Documents
 mkdir -p $USERHOME/Documents/Mosaic
 cp -R $INSTALLFOLDER/$OFFOLDERNAME/apps/d3cod3/Mosaic/bin/examples $USERHOME/Documents/Mosaic
+chown $LOCALUSERNAME:$LOCALUSERNAME -R $USERHOME/Documents/Mosaic
 
 # 12 - Mosaic installed message
 echo -e "\nMosaic $MOSAICVERSION installed and ready to use."
