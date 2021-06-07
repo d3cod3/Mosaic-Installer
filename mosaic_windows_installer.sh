@@ -187,6 +187,14 @@ else
   git clone --branch=master https://github.com/jeffcrouse/ofxJSON
 fi
 
+if [ -d ofxHapPlayer ]; then
+  echo -e "\nUpdating ofxHapPlayer addon..."
+  cd ofxHapPlayer && git checkout -- . && git pull && cd ..
+else
+  echo -e "\nCloning ofxHapPlayer addon..."
+  git clone --branch=master https://github.com/d3cod3/ofxHapPlayer
+fi
+
 if [ -d ofxImGui ]; then
   echo -e "\nUpdating ofxImGui addon..."
   cd ofxImGui && git checkout -- . && git pull && cd ..
@@ -267,19 +275,19 @@ if [ -d d3cod3 ]; then
   rm -rf Mosaic
   git clone --recursive --branch=master https://github.com/d3cod3/Mosaic
   cd Mosaic
-  sed -i '' -e "s/ofxNDI/ /g" addons.make
-  sed -i '' -e "s/ofxPdExternals/ /g" addons.make
-  sed -i '' -e "s/ofxPd/ /g" addons.make
-  sed -i '' -e "s/ofxPython/ /g" addons.make
+  #sed -i '' -e "s/ofxNDI/ /g" addons.make
+  #sed -i '' -e "s/ofxPdExternals/ /g" addons.make
+  #sed -i '' -e "s/ofxPd/ /g" addons.make
+  #sed -i '' -e "s/ofxPython/ /g" addons.make
 else
   mkdir d3cod3
   cd d3cod3
   git clone --recursive --branch=master https://github.com/d3cod3/Mosaic
   cd Mosaic
-  sed -i '' -e "s/ofxNDI/ /g" addons.make
-  sed -i '' -e "s/ofxPdExternals/ /g" addons.make
-  sed -i '' -e "s/ofxPd/ /g" addons.make
-  sed -i '' -e "s/ofxPython/ /g" addons.make
+  #sed -i '' -e "s/ofxNDI/ /g" addons.make
+  #sed -i '' -e "s/ofxPdExternals/ /g" addons.make
+  #sed -i '' -e "s/ofxPd/ /g" addons.make
+  #sed -i '' -e "s/ofxPython/ /g" addons.make
 fi
 
 # 5 - Copy necessary dlls
