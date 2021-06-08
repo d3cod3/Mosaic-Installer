@@ -274,7 +274,7 @@ if [ -d ofxHapPlayer ]; then
   cd ofxHapPlayer && git checkout -- . && git pull && cd ..
 else
   echo -e "\nCloning ofxHapPlayer addon..."
-  git clone --branch=master https://github.com/d3cod3/ofxHapPlayer
+  git clone --branch=libavformat https://github.com/d3cod3/ofxHapPlayer
 fi
 
 if [ -d ofxImGui ]; then
