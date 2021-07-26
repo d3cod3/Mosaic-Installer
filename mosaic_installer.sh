@@ -4,7 +4,7 @@
 # 	----------------------------------------------------------
 #   Mosaic | OF Visual Patching Developer Platform
 #
-#	  Copyright (c) 2020 Emanuele Mazza aka n3m3da
+#	  Copyright (c) 2021 Emanuele Mazza aka n3m3da
 #
 #	  Mosaic is distributed under the MIT License. This gives everyone the
 #   freedoms to use Mosaic in any context: commercial or non-commercial,
@@ -90,8 +90,9 @@ echo "  2)Linux Mint"
 echo "  3)Debian"
 echo "  4)Arch Linux"
 echo "  5)Fedora"
+echo "  6)Ubuntu WMWare"
 echo ""
-echo "[1/2/3/4/5]: "
+echo "[1/2/3/4/5/6]: "
 
 read n
 case $n in
@@ -100,6 +101,7 @@ case $n in
   3) LINUX_DISTRO="Debian";;
   4) LINUX_DISTRO="Arch Linux";;
   5) LINUX_DISTRO="Fedora";;
+  6) LINUX_DISTRO="Ubuntu WMWare";;
   *) echo "Invalid option. Try another one.";;
 esac
 
@@ -111,6 +113,9 @@ echo -e "\nInstalling Mosaic for "$LINUX_DISTRO"\n"
 
 # 2 - Install dependencies
 if [ "$LINUX_DISTRO" == "Ubuntu" ]; then
+  apt update
+  apt install git curl ffmpeg wget libpython3.8-dev libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
+elif [ "$LINUX_DISTRO" == "Ubuntu WMWare" ]; then
   apt update
   apt install git curl ffmpeg wget libpython3.8-dev libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
 elif [ "$LINUX_DISTRO" == "Linux Mint" ]; then
@@ -145,6 +150,8 @@ if [ ! -d $OFFOLDERNAME ]; then
   # install OF dependencies
   echo -e "\nInstalling openFrameworks dependencies"
   if [ "$LINUX_DISTRO" == "Ubuntu" ]; then
+    cd $INSTALLFOLDER/$OFFOLDERNAME/scripts/linux/ubuntu
+  elif [ "$LINUX_DISTRO" == "Ubuntu WMWare" ]; then
     cd $INSTALLFOLDER/$OFFOLDERNAME/scripts/linux/ubuntu
   elif [ "$LINUX_DISTRO" == "Linux Mint" ]; then
     cd $INSTALLFOLDER/$OFFOLDERNAME/scripts/linux/ubuntu
@@ -409,16 +416,24 @@ cd $OFFOLDERNAME/apps
 if [ -d d3cod3 ]; then
   cd d3cod3
   rm -rf Mosaic
-  git clone --recursive --branch=master https://github.com/d3cod3/Mosaic
-  cd Mosaic
-  make -j$NUMPU Release
 else
   mkdir d3cod3
   cd d3cod3
-  git clone --recursive --branch=master https://github.com/d3cod3/Mosaic
-  cd Mosaic
-  make -j$NUMPU Release
 fi
+
+git clone --recursive --branch=master https://github.com/d3cod3/Mosaic
+cd Mosaic
+# fix opengl version for virtual machine compile
+if [ "$LINUX_DISTRO" == "Ubuntu WMWare" ]; then
+  sed -e 's/setGLVersion(4,1)/setGLVersion(2,1)/g' -i src/main.cpp
+  cd $INSTALLFOLDER/$OFFOLDERNAME/addons/ofxVisualProgramming/src
+  sed -e 's/setGLVersion(4,1)/setGLVersion(2,1)/g' -i objects/gui/moTimeline.cpp
+  sed -e 's/setGLVersion(4,1)/setGLVersion(2,1)/g' -i objects/windowing/OutputWindow.cpp
+  sed -e 's/setGLVersion(4,1)/setGLVersion(2,1)/g' -i objects/windowing/ProjectionMapping.cpp
+
+  cd $INSTALLFOLDER/$OFFOLDERNAME/apps/d3cod3/Mosaic
+fi
+make -j$NUMPU Release
 
 # 9 - Create a Mosaic.desktop file for desktop launchers
 if [ ! -e /usr/share/applications/$MOSAICDESKTOPFILE ]; then
