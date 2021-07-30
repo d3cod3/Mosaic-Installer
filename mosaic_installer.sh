@@ -430,6 +430,9 @@ if [ "$LINUX_DISTRO" == "Ubuntu WMWare" ]; then
   sed -e 's/setGLVersion(4,1)/setGLVersion(2,1)/g' -i objects/gui/moTimeline.cpp
   sed -e 's/setGLVersion(4,1)/setGLVersion(2,1)/g' -i objects/windowing/OutputWindow.cpp
   sed -e 's/setGLVersion(4,1)/setGLVersion(2,1)/g' -i objects/windowing/ProjectionMapping.cpp
+  cd $INSTALLFOLDER/$OFFOLDERNAME/addons/ofxImGui/libs/imgui/backends
+  sed -e '/MAP_BUTTON/s/^/\/\//g' -i imgui_impl_glfw.cpp
+  sed -e '/MAP_ANALOG/s/^/\/\//g' -i imgui_impl_glfw.cpp
 
   cd $INSTALLFOLDER/$OFFOLDERNAME/apps/d3cod3/Mosaic
 fi
