@@ -463,6 +463,13 @@ mkdir -p $USERHOME/Documents/Mosaic
 cp -R $INSTALLFOLDER/$OFFOLDERNAME/apps/d3cod3/Mosaic/bin/examples $USERHOME/Documents/Mosaic
 chown $LOCALUSERNAME:$LOCALUSERNAME -R $USERHOME/Documents/Mosaic
 
+# set shaders examples to 120 version
+if [ "$LINUX_DISTRO" == "Ubuntu WMWare" ]; then
+  cd $USERHOME/Documents/Mosaic/examples/livecoding
+  rm -rf glsl/
+  mv glsl_120/ glsl/
+fi
+
 # 12 - Mosaic installed message
 echo -e "\nMosaic $MOSAICVERSION installed and ready to use."
 echo -e "\nYou will find it in your applications menu."
