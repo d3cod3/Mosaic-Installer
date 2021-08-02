@@ -468,6 +468,9 @@ if [ "$LINUX_DISTRO" == "Ubuntu WMWare" ]; then
   cd $USERHOME/Documents/Mosaic/examples/livecoding
   rm -rf glsl/
   mv glsl_120/ glsl/
+else
+  cd $USERHOME/Documents/Mosaic/examples/livecoding
+  rm -rf glsl_120/
 fi
 
 # 12 - Mosaic installed message
