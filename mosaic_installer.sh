@@ -421,8 +421,10 @@ else
   cd d3cod3
 fi
 
+# clone repo
 git clone --recursive --branch=master https://github.com/d3cod3/Mosaic
 cd Mosaic
+
 # fix opengl version for virtual machine compile
 if [ "$LINUX_DISTRO" == "Ubuntu WMWare" ]; then
   sed -e 's/setGLVersion(4,1)/setGLVersion(2,1)/g' -i src/main.cpp
@@ -430,12 +432,16 @@ if [ "$LINUX_DISTRO" == "Ubuntu WMWare" ]; then
   sed -e 's/setGLVersion(4,1)/setGLVersion(2,1)/g' -i objects/gui/moTimeline.cpp
   sed -e 's/setGLVersion(4,1)/setGLVersion(2,1)/g' -i objects/windowing/OutputWindow.cpp
   sed -e 's/setGLVersion(4,1)/setGLVersion(2,1)/g' -i objects/windowing/ProjectionMapping.cpp
-  cd $INSTALLFOLDER/$OFFOLDERNAME/addons/ofxImGui/libs/imgui/backends
-  sed -e '/MAP_BUTTON/s/^/\/\//g' -i imgui_impl_glfw.cpp
-  sed -e '/MAP_ANALOG/s/^/\/\//g' -i imgui_impl_glfw.cpp
 
-  cd $INSTALLFOLDER/$OFFOLDERNAME/apps/d3cod3/Mosaic
 fi
+
+cd $INSTALLFOLDER/$OFFOLDERNAME/addons/ofxImGui/libs/imgui/backends
+sed -e '/MAP_BUTTON/s/^/\/\//g' -i imgui_impl_glfw.cpp
+sed -e '/MAP_ANALOG/s/^/\/\//g' -i imgui_impl_glfw.cpp
+
+cd $INSTALLFOLDER/$OFFOLDERNAME/apps/d3cod3/Mosaic
+
+# compile
 make -j$NUMPU Release
 
 # 9 - Create a Mosaic.desktop file for desktop launchers
