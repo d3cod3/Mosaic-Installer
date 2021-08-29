@@ -200,7 +200,7 @@ if [ -d ofxImGui ]; then
   cd ofxImGui && git checkout -- . && git pull && cd ..
 else
   echo -e "\nCloning ofxImGui addon..."
-  git clone --branch=master https://github.com/Daandelange/ofxImGui
+  git clone --branch=master https://github.com/d3cod3/ofxImGui
 fi
 
 if [ -d ofxInfiniteCanvas ]; then

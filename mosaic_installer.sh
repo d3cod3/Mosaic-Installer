@@ -289,7 +289,7 @@ if [ -d ofxImGui ]; then
   cd ofxImGui && git checkout -- . && git pull && cd ..
 else
   echo -e "\nCloning ofxImGui addon..."
-  git clone --branch=master https://github.com/Daandelange/ofxImGui
+  git clone --branch=master https://github.com/d3cod3/ofxImGui
 fi
 
 if [ -d ofxInfiniteCanvas ]; then
@@ -435,9 +435,9 @@ if [ "$LINUX_DISTRO" == "Ubuntu WMWare" ]; then
 
 fi
 
-cd $INSTALLFOLDER/$OFFOLDERNAME/addons/ofxImGui/libs/imgui/backends
-sed -e '/MAP_BUTTON/s/^/\/\//g' -i imgui_impl_glfw.cpp
-sed -e '/MAP_ANALOG/s/^/\/\//g' -i imgui_impl_glfw.cpp
+#cd $INSTALLFOLDER/$OFFOLDERNAME/addons/ofxImGui/libs/imgui/backends
+#sed -e '/MAP_BUTTON/s/^/\/\//g' -i imgui_impl_glfw.cpp
+#sed -e '/MAP_ANALOG/s/^/\/\//g' -i imgui_impl_glfw.cpp
 
 cd $INSTALLFOLDER/$OFFOLDERNAME/apps/d3cod3/Mosaic
 
