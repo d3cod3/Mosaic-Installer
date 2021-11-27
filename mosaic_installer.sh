@@ -114,24 +114,24 @@ echo -e "\nInstalling Mosaic for "$LINUX_DISTRO"\n"
 # 2 - Install dependencies
 if [ "$LINUX_DISTRO" == "Ubuntu" ]; then
   apt update
-  apt install git curl ffmpeg wget libpython3.8-dev libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
+  apt install git curl ffmpeg wget net-tools libpython3.8-dev libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
 elif [ "$LINUX_DISTRO" == "Ubuntu WMWare" ]; then
   apt update
-  apt install git curl ffmpeg wget libpython3.8-dev libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
+  apt install git curl ffmpeg wget net-tools libpython3.8-dev libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
 elif [ "$LINUX_DISTRO" == "Linux Mint" ]; then
   apt update
-  apt install git curl ffmpeg wget libpython3.8-dev libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
+  apt install git curl ffmpeg wget net-tools libpython3.8-dev libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
 elif [ "$LINUX_DISTRO" == "Debian" ]; then
   apt update
-  apt install git curl ffmpeg wget libpython3.8-dev rsync libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
+  apt install git curl ffmpeg wget net-tools libpython3.8-dev rsync libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
 elif [ "$LINUX_DISTRO" == "Arch Linux" ]; then
   pacman -Syu
-  pacman -Syu base-devel python git curl ffmpeg wget rsync snappy nano
+  pacman -Syu base-devel python git curl ffmpeg wget net-tools rsync snappy nano
 elif [ "$LINUX_DISTRO" == "Fedora" ]; then
   dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
   dnf -y install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
   dnf update
-  dnf install nano make git curl ffmpeg wget python3-libs python3-devel
+  dnf install nano make git curl ffmpeg wget net-tools python3-libs python3-devel
 fi
 
 MOSAICVERSION="$( curl https://raw.githubusercontent.com/d3cod3/Mosaic/master/bin/data/release.txt )"
