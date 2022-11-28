@@ -171,14 +171,6 @@ else
   git clone --branch=master https://github.com/d3cod3/ofxFFmpegRecorder
 fi
 
-if [ -d ofxGLEditor ]; then
-  echo -e "\nUpdating ofxGLEditor addon..."
-  cd ofxGLEditor && git checkout -- . && git pull && cd ..
-else
-  echo -e "\nCloning ofxGLEditor addon..."
-  git clone --branch=master https://github.com/Akira-Hayasaka/ofxGLEditor
-fi
-
 if [ -d ofxJSON ]; then
   echo -e "\nUpdating ofxJSON addon..."
   cd ofxJSON && git checkout -- . && git pull && cd ..
@@ -208,7 +200,7 @@ if [ -d ofxLua ]; then
   cd ofxLua && git checkout -- . && git pull && cd ..
 else
   echo -e "\nCloning ofxLua addon..."
-  git clone --branch=of-0.10.0 https://github.com/d3cod3/ofxLua
+  git clone --branch=master https://github.com/danomatika/ofxLua
 fi
 
 if [ -d ofxMidi ]; then

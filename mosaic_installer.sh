@@ -114,16 +114,16 @@ echo -e "\nInstalling Mosaic for "$LINUX_DISTRO"\n"
 # 2 - Install dependencies
 if [ "$LINUX_DISTRO" == "Ubuntu" ]; then
   apt update
-  apt install git curl ffmpeg wget net-tools libpython3.8-dev libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
+  apt install git curl ffmpeg wget net-tools libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
 elif [ "$LINUX_DISTRO" == "Ubuntu WMWare" ]; then
   apt update
-  apt install git curl ffmpeg wget net-tools libpython3.8-dev libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
+  apt install git curl ffmpeg wget net-tools libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
 elif [ "$LINUX_DISTRO" == "Linux Mint" ]; then
   apt update
-  apt install git curl ffmpeg wget net-tools libpython3.8-dev libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
+  apt install git curl ffmpeg wget net-tools libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
 elif [ "$LINUX_DISTRO" == "Debian" ]; then
   apt update
-  apt install git curl ffmpeg wget net-tools libpython3.8-dev rsync libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
+  apt install git curl ffmpeg wget net-tools rsync libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
 elif [ "$LINUX_DISTRO" == "Arch Linux" ]; then
   pacman -Syu
   pacman -Syu base-devel python git curl ffmpeg wget net-tools rsync snappy nano
@@ -131,7 +131,7 @@ elif [ "$LINUX_DISTRO" == "Fedora" ]; then
   dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
   dnf -y install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
   dnf update
-  dnf install nano make git curl ffmpeg wget net-tools python3-libs python3-devel
+  dnf install nano make git curl ffmpeg wget net-tools
 fi
 
 MOSAICVERSION="$( curl https://raw.githubusercontent.com/d3cod3/Mosaic/master/bin/data/release.txt )"
@@ -190,18 +190,7 @@ if [ ! -d $OFFOLDERNAME ]; then
   ./compileOF.sh -j$NUMPU
 fi
 
-# 4 - Fix python symbolic link for compiling
-if [ "$LINUX_DISTRO" == "Fedora" ]; then
-  if [ ! -e /usr/lib64/pkgconfig/python3.pc ]; then
-    ln -s /usr/lib64/pkgconfig/python-3.8.pc /usr/lib64/pkgconfig/python3.pc
-  fi
-else
-  if [ ! -e /usr/lib/x86_64-linux-gnu/pkgconfig/python3.pc ]; then
-    ln -s /usr/lib/x86_64-linux-gnu/pkgconfig/python-3.8.pc /usr/lib/x86_64-linux-gnu/pkgconfig/python3.pc
-  fi
-fi
-
-# 5 - Install ofxaddons dependencies
+# 4 - Install ofxaddons dependencies
 cd $INSTALLFOLDER/$OFFOLDERNAME/addons
 
 if [ -d ofxAudioAnalyzer ]; then
@@ -260,14 +249,6 @@ else
   git clone --branch=master https://github.com/d3cod3/ofxFFmpegRecorder
 fi
 
-if [ -d ofxGLEditor ]; then
-  echo -e "\nUpdating ofxGLEditor addon..."
-  cd ofxGLEditor && git checkout -- . && git pull && cd ..
-else
-  echo -e "\nCloning ofxGLEditor addon..."
-  git clone --branch=master https://github.com/Akira-Hayasaka/ofxGLEditor
-fi
-
 if [ -d ofxJSON ]; then
   echo -e "\nUpdating ofxJSON addon..."
   cd ofxJSON && git checkout -- . && git pull && cd ..
@@ -305,7 +286,7 @@ if [ -d ofxLua ]; then
   cd ofxLua && git checkout -- . && git pull && cd ..
 else
   echo -e "\nCloning ofxLua addon..."
-  git clone --branch=of-0.10.0 https://github.com/d3cod3/ofxLua
+  git clone --branch=master https://github.com/danomatika/ofxLua
 fi
 
 if [ -d ofxMidi ]; then
@@ -356,14 +337,6 @@ else
   git clone --branch=master https://github.com/d3cod3/ofxPDSP
 fi
 
-if [ -d ofxPython ]; then
-  echo -e "\nUpdating ofxPython addon..."
-  cd ofxPython && git checkout -- . && git pull && cd ..
-else
-  echo -e "\nCloning ofxPython addon..."
-  git clone --branch=master https://github.com/d3cod3/ofxPython
-fi
-
 if [ -d ofxTimeline ]; then
   echo -e "\nUpdating ofxTimeline addon..."
   cd ofxTimeline && git checkout -- . && git pull && cd ..
@@ -388,7 +361,7 @@ else
   git clone --branch=master https://github.com/d3cod3/ofxWarp
 fi
 
-# 6 - Compile fftw3.3.2 library from source and install
+# 5 - Compile fftw3.3.2 library from source and install
 if [ ! -e $INSTALLFOLDER/$OFFOLDERNAME/addons/ofxAudioAnalyzer/libs/fftw3f/lib/linux64/libfftw3f.a ]; then
 	cd $INSTALLFOLDER
 	git clone --branch=master https://github.com/d3cod3/fftw3.3.2-source
@@ -402,7 +375,7 @@ if [ ! -e $INSTALLFOLDER/$OFFOLDERNAME/addons/ofxAudioAnalyzer/libs/fftw3f/lib/l
 	rm -rf fftw3.3.2-source/
 fi
 
-# 7 - Copy libndi
+# 6 - Copy libndi
 if [ ! -e /usr/local/lib/libndi.so.3.7.1 ]; then
   echo -e "\nCopying libndi to /usr/local/lib"
   cd $INSTALLFOLDER
@@ -410,7 +383,7 @@ if [ ! -e /usr/local/lib/libndi.so.3.7.1 ]; then
   ln -s /usr/local/lib/libndi.so.3.7.1 /usr/lib/libndi.so.3
 fi
 
-# 8 - Clone and compile Mosaic
+# 7 - Clone and compile Mosaic
 cd $INSTALLFOLDER
 cd $OFFOLDERNAME/apps
 if [ -d d3cod3 ]; then
@@ -435,16 +408,12 @@ if [ "$LINUX_DISTRO" == "Ubuntu WMWare" ]; then
 
 fi
 
-#cd $INSTALLFOLDER/$OFFOLDERNAME/addons/ofxImGui/libs/imgui/backends
-#sed -e '/MAP_BUTTON/s/^/\/\//g' -i imgui_impl_glfw.cpp
-#sed -e '/MAP_ANALOG/s/^/\/\//g' -i imgui_impl_glfw.cpp
-
 cd $INSTALLFOLDER/$OFFOLDERNAME/apps/d3cod3/Mosaic
 
 # compile
 make -j$NUMPU Release
 
-# 9 - Create a Mosaic.desktop file for desktop launchers
+# 8 - Create a Mosaic.desktop file for desktop launchers
 if [ ! -e /usr/share/applications/$MOSAICDESKTOPFILE ]; then
   cd $INSTALLFOLDER/$OFFOLDERNAME/apps/d3cod3/Mosaic/bin
   echo "[Desktop Entry]" > $MOSAICDESKTOPFILE
@@ -460,11 +429,11 @@ if [ ! -e /usr/share/applications/$MOSAICDESKTOPFILE ]; then
   cp $MOSAICDESKTOPFILE /usr/share/applications
 fi
 
-# 10 - Change the ownership of the entire openFrameworks folder to local user
+# 9 - Change the ownership of the entire openFrameworks folder to local user
 cd $INSTALLFOLDER
 chown $LOCALUSERNAME:$LOCALUSERNAME -R $OFFOLDERNAME/
 
-# 11 - Create Mosaic Example folder in ~/Documents
+# 10 - Create Mosaic Example folder in ~/Documents
 mkdir -p $USERHOME/Documents/Mosaic
 cp -R $INSTALLFOLDER/$OFFOLDERNAME/apps/d3cod3/Mosaic/bin/examples $USERHOME/Documents/Mosaic
 chown $LOCALUSERNAME:$LOCALUSERNAME -R $USERHOME/Documents/Mosaic
@@ -479,7 +448,7 @@ else
   rm -rf glsl_120/
 fi
 
-# 12 - Mosaic installed message
+# 11 - Mosaic installed message
 echo -e "\nMosaic $MOSAICVERSION installed and ready to use."
 echo -e "\nYou will find it in your applications menu."
 
