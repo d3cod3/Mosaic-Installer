@@ -45,10 +45,10 @@ MOSAICVERSION="$( curl https://raw.githubusercontent.com/d3cod3/Mosaic/master/bi
 LOCALUSERNAME="$( who | awk '{print $1}' )"
 INSTALLFOLDER=/opt
 OFFOLDERNAME=openFrameworks
-# HARDCODED OPENFRAMEWORKS RELEASE, using 0.11.0
-OFRELURL=https://openframeworks.cc/versions/v0.11.0/of_v0.11.0_msys2_release.zip
-OFRELFILENAME=of_v0.11.0_msys2_release.zip
-OFRELORIGINALNAME=of_v0.11.0_msys2_release
+# HARDCODED OPENFRAMEWORKS RELEASE, using 0.12.0
+OFRELURL=https://github.com/openframeworks/openFrameworks/releases/download/0.11.2/of_v0.11.2_msys2_mingw64_release.zip
+OFRELFILENAME=of_v0.11.2_msys2_mingw64_release.zip
+OFRELORIGINALNAME=of_v0.11.2_msys2_mingw64_release
 
 INSTALL_OK="NO"
 ###############################################################################
@@ -115,14 +115,6 @@ fi
 # 3 - Install ofxaddons dependencies
 cd $INSTALLFOLDER/$OFFOLDERNAME/addons
 
-if [ -d ofxAudioAnalyzer ]; then
-  echo -e "\nUpdating ofxAudioAnalyzer addon..."
-  cd ofxAudioAnalyzer && git checkout -- . && git pull && cd ..
-else
-  echo -e "\nCloning ofxAudioAnalyzer addon..."
-  git clone --branch=master https://github.com/d3cod3/ofxAudioAnalyzer
-fi
-
 if [ -d ofxAudioFile ]; then
   echo -e "\nUpdating ofxAudioFile addon..."
   cd ofxAudioFile && git checkout -- . && git pull && cd ..
@@ -169,6 +161,14 @@ if [ -d ofxFFmpegRecorder ]; then
 else
   echo -e "\nCloning ofxFFmpegRecorder addon..."
   git clone --branch=master https://github.com/d3cod3/ofxFFmpegRecorder
+fi
+
+if [ -d ofxFft ]; then
+  echo -e "\nUpdating ofxFft addon..."
+  cd ofxFft && git checkout -- . && git pull && cd ..
+else
+  echo -e "\nCloning ofxFft addon..."
+  git clone --branch=master https://github.com/kylemcdonald/ofxFft
 fi
 
 if [ -d ofxJSON ]; then
@@ -259,19 +259,11 @@ if [ -d d3cod3 ]; then
   rm -rf Mosaic
   git clone --recursive --branch=master https://github.com/d3cod3/Mosaic
   cd Mosaic
-  #sed -i '' -e "s/ofxNDI/ /g" addons.make
-  #sed -i '' -e "s/ofxPdExternals/ /g" addons.make
-  #sed -i '' -e "s/ofxPd/ /g" addons.make
-  #sed -i '' -e "s/ofxPython/ /g" addons.make
 else
   mkdir d3cod3
   cd d3cod3
   git clone --recursive --branch=master https://github.com/d3cod3/Mosaic
   cd Mosaic
-  #sed -i '' -e "s/ofxNDI/ /g" addons.make
-  #sed -i '' -e "s/ofxPdExternals/ /g" addons.make
-  #sed -i '' -e "s/ofxPd/ /g" addons.make
-  #sed -i '' -e "s/ofxPython/ /g" addons.make
 fi
 
 # 5 - Copy necessary dlls

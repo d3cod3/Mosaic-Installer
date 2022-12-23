@@ -63,10 +63,10 @@ MOSAICDESKTOPFILE=Mosaic.desktop
 LOCALUSERNAME="$( who | awk '{print $1}' )"
 INSTALLFOLDER=/opt
 OFFOLDERNAME=openFrameworks
-# HARDCODED OPENFRAMEWORKS RELEASE, using 0.11.0
-OFRELURL=https://openframeworks.cc/versions/v0.11.0/of_v0.11.0_linux64gcc6_release.tar.gz
-OFRELFILENAME=of_v0.11.0_linux64gcc6_release.tar.gz
-OFRELORIGINALNAME=of_v0.11.0_linux64gcc6_release
+# HARDCODED OPENFRAMEWORKS RELEASE, using 0.11.2
+OFRELURL=https://github.com/openframeworks/openFrameworks/releases/download/0.11.2/of_v0.11.2_linux64gcc6_release.tar.gz
+OFRELFILENAME=of_v0.11.2_linux64gcc6_release.tar.gz
+OFRELORIGINALNAME=of_v0.11.2_linux64gcc6_release
 
 NPROC="$( nproc )"
 NUMPU="1"
@@ -126,7 +126,7 @@ elif [ "$LINUX_DISTRO" == "Debian" ]; then
   apt install git curl ffmpeg wget net-tools rsync libsnappy-dev libswresample-dev libavcodec-dev libavformat-dev libdispatch-dev
 elif [ "$LINUX_DISTRO" == "Arch Linux" ]; then
   pacman -Syu
-  pacman -Syu base-devel python git curl ffmpeg wget net-tools rsync snappy nano
+  pacman -Syu base-devel git curl ffmpeg wget net-tools rsync snappy nano
 elif [ "$LINUX_DISTRO" == "Fedora" ]; then
   dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
   dnf -y install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
@@ -172,7 +172,7 @@ if [ ! -d $OFFOLDERNAME ]; then
 
   # small compile fixes
   cd $INSTALLFOLDER/$OFFOLDERNAME/libs/openFrameworks/utils
-  sed -e '/GL\/glext.h/ s/^#*/\/\//' -i ofConstants.h
+  #sed -e '/GL\/glext.h/ s/^#*/\/\//' -i ofConstants.h
   if [ "$LINUX_DISTRO" == "Arch Linux" ]; then
     cd $INSTALLFOLDER/$OFFOLDERNAME/libs/openFrameworks/sound
     wget -O openal_fix.patch https://aur.archlinux.org/cgit/aur.git/plain/openal_fix.patch?h=openframeworks
@@ -192,14 +192,6 @@ fi
 
 # 4 - Install ofxaddons dependencies
 cd $INSTALLFOLDER/$OFFOLDERNAME/addons
-
-if [ -d ofxAudioAnalyzer ]; then
-  echo -e "\nUpdating ofxAudioAnalyzer addon..."
-  cd ofxAudioAnalyzer && git checkout -- . && git pull && cd ..
-else
-  echo -e "\nCloning ofxAudioAnalyzer addon..."
-  git clone --branch=master https://github.com/d3cod3/ofxAudioAnalyzer
-fi
 
 if [ -d ofxAudioFile ]; then
   echo -e "\nUpdating ofxAudioFile addon..."
@@ -247,6 +239,14 @@ if [ -d ofxFFmpegRecorder ]; then
 else
   echo -e "\nCloning ofxFFmpegRecorder addon..."
   git clone --branch=master https://github.com/d3cod3/ofxFFmpegRecorder
+fi
+
+if [ -d ofxFft ]; then
+  echo -e "\nUpdating ofxFft addon..."
+  cd ofxFft && git checkout -- . && git pull && cd ..
+else
+  echo -e "\nCloning ofxFft addon..."
+  git clone --branch=master https://github.com/kylemcdonald/ofxFft
 fi
 
 if [ -d ofxJSON ]; then
@@ -362,18 +362,18 @@ else
 fi
 
 # 5 - Compile fftw3.3.2 library from source and install
-if [ ! -e $INSTALLFOLDER/$OFFOLDERNAME/addons/ofxAudioAnalyzer/libs/fftw3f/lib/linux64/libfftw3f.a ]; then
-	cd $INSTALLFOLDER
-	git clone --branch=master https://github.com/d3cod3/fftw3.3.2-source
-	cd fftw3.3.2-source
-	./configure --prefix=`pwd` --enable-float --enable-sse2 --with-incoming-stack-boundary=2 --with-our-malloc16 --disable-shared --enable-static
-  make MAKEINFO=true -j$NUMPU
-	cd .libs
-	mkdir $INSTALLFOLDER/$OFFOLDERNAME/addons/ofxAudioAnalyzer/libs/fftw3f/lib/linux64
-	cp libfftw3f.a $INSTALLFOLDER/$OFFOLDERNAME/addons/ofxAudioAnalyzer/libs/fftw3f/lib/linux64/
-	cd $INSTALLFOLDER
-	rm -rf fftw3.3.2-source/
-fi
+#if [ ! -e $INSTALLFOLDER/$OFFOLDERNAME/addons/ofxAudioAnalyzer/libs/fftw3f/lib/linux64/libfftw3f.a ]; then
+#	cd $INSTALLFOLDER
+#	git clone --branch=master https://github.com/d3cod3/fftw3.3.2-source
+#	cd fftw3.3.2-source
+#	./configure --prefix=`pwd` --enable-float --enable-sse2 --with-incoming-stack-boundary=2 --with-our-malloc16 --disable-shared --enable-static
+#  make MAKEINFO=true -j$NUMPU
+#	cd .libs
+#	mkdir $INSTALLFOLDER/$OFFOLDERNAME/addons/ofxAudioAnalyzer/libs/fftw3f/lib/linux64
+#	cp libfftw3f.a $INSTALLFOLDER/$OFFOLDERNAME/addons/ofxAudioAnalyzer/libs/fftw3f/lib/linux64/
+#	cd $INSTALLFOLDER
+#	rm -rf fftw3.3.2-source/
+#fi
 
 # 6 - Copy libndi
 if [ ! -e /usr/local/lib/libndi.so.3.7.1 ]; then
