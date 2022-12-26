@@ -321,14 +321,6 @@ else
   git clone --branch=master https://github.com/danomatika/ofxPd
 fi
 
-if [ -d ofxPdExternals ]; then
-  echo -e "\nUpdating ofxPdExternals addon..."
-  cd ofxPdExternals && git checkout -- . && git pull && cd ..
-else
-  echo -e "\nCloning ofxPdExternals addon..."
-  git clone --branch=master https://github.com/d3cod3/ofxPdExternals
-fi
-
 if [ -d ofxPDSP ]; then
   echo -e "\nUpdating ofxPDSP addon..."
   cd ofxPDSP && git checkout -- . && git pull && cd ..
