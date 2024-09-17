@@ -64,9 +64,10 @@ LOCALUSERNAME="$( who | awk '{print $1}' )"
 INSTALLFOLDER=/opt
 OFFOLDERNAME=openFrameworks
 # HARDCODED OPENFRAMEWORKS RELEASE, using 0.11.2
-OFRELURL=https://github.com/openframeworks/openFrameworks/releases/download/0.11.2/of_v0.11.2_linux64gcc6_release.tar.gz
-OFRELFILENAME=of_v0.11.2_linux64gcc6_release.tar.gz
-OFRELORIGINALNAME=of_v0.11.2_linux64gcc6_release
+#OFRELURL=https://github.com/openframeworks/openFrameworks/releases/download/0.11.2/of_v0.11.2_linux64gcc6_release.tar.gz
+OFRELURL=https://www.d3cod3.org/downloads/of_v0.12.0_linux64gcc6_release_Mosaic.tar.gz
+OFRELFILENAME=of_v0.12.0_linux64gcc6_release_Mosaic.tar.gz
+OFRELORIGINALNAME=of_v0.12.0_linux64gcc6_release_Mosaic
 
 NPROC="$( nproc )"
 NUMPU="1"
@@ -219,7 +220,7 @@ if [ -d ofxCv ]; then
   cd ofxCv && git checkout -- . && git pull && cd ..
 else
   echo -e "\nCloning ofxCv addon..."
-  git clone --branch=master https://github.com/kylemcdonald/ofxCv
+  git clone --branch=master https://github.com/d3cod3/ofxCv
 fi
 
 if [ -d ofxEasing ]; then
@@ -294,13 +295,13 @@ else
   git clone --branch=master https://github.com/d3cod3/ofxMtlMapping2D
 fi
 
-if [ -d ofxNDI ]; then
-  echo -e "\nUpdating ofxNDI addon..."
-  cd ofxNDI && git checkout -- . && git pull && cd ..
-else
-  echo -e "\nCloning ofxNDI addon..."
-  git clone --branch=master https://github.com/d3cod3/ofxNDI
-fi
+#if [ -d ofxNDI ]; then
+#  echo -e "\nUpdating ofxNDI addon..."
+#  cd ofxNDI && git checkout -- . && git pull && cd ..
+#else
+#  echo -e "\nCloning ofxNDI addon..."
+#  git clone --branch=master https://github.com/d3cod3/ofxNDI
+#fi
 
 if [ -d ofxPd ]; then
   echo -e "\nUpdating ofxPd addon..."
@@ -343,12 +344,12 @@ else
 fi
 
 # 5 - Copy libndi
-if [ ! -e /usr/local/lib/libndi.so.3.7.1 ]; then
-  echo -e "\nCopying libndi to /usr/local/lib"
-  cd $INSTALLFOLDER
-  cp $OFFOLDERNAME/addons/ofxNDI/libs/libndi/lib/x86_64-linux-gnu/libndi.so.3.7.1 /usr/local/lib
-  ln -s /usr/local/lib/libndi.so.3.7.1 /usr/lib/libndi.so.3
-fi
+#if [ ! -e /usr/local/lib/libndi.so.3.7.1 ]; then
+#  echo -e "\nCopying libndi to /usr/local/lib"
+#  cd $INSTALLFOLDER
+#  cp $OFFOLDERNAME/addons/ofxNDI/libs/libndi/lib/x86_64-linux-gnu/libndi.so.3.7.1 /usr/local/lib
+#  ln -s /usr/local/lib/libndi.so.3.7.1 /usr/lib/libndi.so.3
+#fi
 
 # 6 - Clone and compile Mosaic
 cd $INSTALLFOLDER
