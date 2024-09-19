@@ -115,16 +115,16 @@ echo -e "\nInstalling Mosaic for "$LINUX_DISTRO"\n"
 # 2 - Install dependencies
 if [ "$LINUX_DISTRO" == "Ubuntu" ]; then
   apt update
-  apt install git curl ffmpeg wget net-tools
+  apt install git curl ffmpeg wget build-essential net-tools
 elif [ "$LINUX_DISTRO" == "Ubuntu WMWare" ]; then
   apt update
-  apt install git curl ffmpeg wget net-tools
+  apt install git curl ffmpeg wget build-essential net-tools
 elif [ "$LINUX_DISTRO" == "Linux Mint" ]; then
   apt update
-  apt install git curl ffmpeg wget net-tools
+  apt install git curl ffmpeg wget build-essential net-tools
 elif [ "$LINUX_DISTRO" == "Debian" ]; then
   apt update
-  apt install git curl ffmpeg wget net-tools rsync
+  apt install git curl ffmpeg wget build-essential net-tools rsync
 elif [ "$LINUX_DISTRO" == "Arch Linux" ]; then
   pacman -Syu
   pacman -Syu base-devel git curl ffmpeg wget net-tools rsync nano
