@@ -168,6 +168,9 @@ if [ ! -d $OFFOLDERNAME ]; then
   fi
   ./install_dependencies.sh -y
   ./install_codecs.sh
+  if [ "$LINUX_DISTRO" == "Ubuntu" ]; then
+    apt install gstreamer1.0-vaapi gstreamer1.0-libav
+  fi
 
   # small compile fixes
   cd $INSTALLFOLDER/$OFFOLDERNAME/libs/openFrameworks/utils
