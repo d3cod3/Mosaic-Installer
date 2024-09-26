@@ -115,16 +115,16 @@ echo -e "\nInstalling Mosaic for "$LINUX_DISTRO"\n"
 # 2 - Install dependencies
 if [ "$LINUX_DISTRO" == "Ubuntu" ]; then
   apt update
-  apt install git curl ffmpeg wget build-essential net-tools
+  apt install git curl ffmpeg wget build-essential net-tools -y
 elif [ "$LINUX_DISTRO" == "Ubuntu WMWare" ]; then
   apt update
-  apt install git curl ffmpeg wget build-essential net-tools
+  apt install git curl ffmpeg wget build-essential net-tools -y
 elif [ "$LINUX_DISTRO" == "Linux Mint" ]; then
   apt update
-  apt install git curl ffmpeg wget build-essential net-tools
+  apt install git curl ffmpeg wget build-essential net-tools -y
 elif [ "$LINUX_DISTRO" == "Debian" ]; then
   apt update
-  apt install git curl ffmpeg wget build-essential net-tools rsync
+  apt install git curl ffmpeg wget build-essential net-tools rsync -y
 elif [ "$LINUX_DISTRO" == "Arch Linux" ]; then
   pacman -Syu
   pacman -Syu base-devel git curl ffmpeg wget net-tools rsync nano
@@ -169,7 +169,7 @@ if [ ! -d $OFFOLDERNAME ]; then
   ./install_dependencies.sh -y
   ./install_codecs.sh
   if [ "$LINUX_DISTRO" == "Ubuntu" ]; then
-    apt install gstreamer1.0-vaapi gstreamer1.0-libav
+    apt install gstreamer1.0-vaapi gstreamer1.0-libav -y
   fi
 
   # small compile fixes
