@@ -4,14 +4,14 @@
 # 	----------------------------------------------------------
 #   Mosaic | OF Visual Patching Developer Platform
 #
-#	  Copyright (c) 2021 Emanuele Mazza aka n3m3da
+#	  Copyright (c) 2024 Emanuele Mazza aka n3m3da
 #
 #	  Mosaic is distributed under the MIT License. This gives everyone the
 #   freedoms to use Mosaic in any context: commercial or non-commercial,
 #   public or private, open or closed source.
 #
 #   See https://github.com/d3cod3/Mosaic for documentation
-#	----------------------------------------------------------
+#	  ----------------------------------------------------------
 #
 #
 #	  Mosaic auto compile/install script for multi linux boxes
@@ -298,19 +298,11 @@ else
   git clone --branch=master https://github.com/d3cod3/ofxMtlMapping2D
 fi
 
-#if [ -d ofxNDI ]; then
-#  echo -e "\nUpdating ofxNDI addon..."
-#  cd ofxNDI && git checkout -- . && git pull && cd ..
-#else
-#  echo -e "\nCloning ofxNDI addon..."
-#  git clone --branch=master https://github.com/d3cod3/ofxNDI
-#fi
-
 if [ -d ofxPd ]; then
   echo -e "\nUpdating ofxPd addon..."
   cd ofxPd && git checkout -- . && git pull && cd ..
 else
-  echo -e "\nCloning ofxAudofxPdioAnalyzer addon..."
+  echo -e "\nCloning ofxPd addon..."
   git clone --branch=master https://github.com/danomatika/ofxPd
 fi
 
@@ -346,15 +338,7 @@ else
   git clone --branch=master https://github.com/d3cod3/ofxWarp
 fi
 
-# 5 - Copy libndi
-#if [ ! -e /usr/local/lib/libndi.so.3.7.1 ]; then
-#  echo -e "\nCopying libndi to /usr/local/lib"
-#  cd $INSTALLFOLDER
-#  cp $OFFOLDERNAME/addons/ofxNDI/libs/libndi/lib/x86_64-linux-gnu/libndi.so.3.7.1 /usr/local/lib
-#  ln -s /usr/local/lib/libndi.so.3.7.1 /usr/lib/libndi.so.3
-#fi
-
-# 6 - Clone and compile Mosaic
+# 5 - Clone and compile Mosaic
 cd $INSTALLFOLDER
 cd $OFFOLDERNAME/apps
 if [ -d d3cod3 ]; then
@@ -374,7 +358,7 @@ cd $INSTALLFOLDER/$OFFOLDERNAME/apps/d3cod3/Mosaic
 # compile
 make -j$NUMPU Release
 
-# 7 - Create a Mosaic.desktop file for desktop launchers
+# 6 - Create a Mosaic.desktop file for desktop launchers
 if [ ! -e /usr/share/applications/$MOSAICDESKTOPFILE ]; then
   cd $INSTALLFOLDER/$OFFOLDERNAME/apps/d3cod3/Mosaic/bin
   echo "[Desktop Entry]" > $MOSAICDESKTOPFILE
@@ -390,16 +374,16 @@ if [ ! -e /usr/share/applications/$MOSAICDESKTOPFILE ]; then
   cp $MOSAICDESKTOPFILE /usr/share/applications
 fi
 
-# 8 - Change the ownership of the entire openFrameworks folder to local user
+# 7 - Change the ownership of the entire openFrameworks folder to local user
 cd $INSTALLFOLDER
 chown $LOCALUSERNAME:$LOCALUSERNAME -R $OFFOLDERNAME/
 
-# 9 - Create Mosaic Example folder in ~/Documents
+# 8 - Create Mosaic Example folder in ~/Documents
 mkdir -p $USERHOME/Documents/Mosaic
 cp -R $INSTALLFOLDER/$OFFOLDERNAME/apps/d3cod3/Mosaic/bin/examples $USERHOME/Documents/Mosaic
 chown $LOCALUSERNAME:$LOCALUSERNAME -R $USERHOME/Documents/Mosaic
 
-# 10 - Mosaic installed message
+# 9 - Mosaic installed message
 echo -e "\nMosaic $MOSAICVERSION installed and ready to use."
 echo -e "\nYou will find it in your applications menu."
 
