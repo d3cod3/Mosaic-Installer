@@ -115,24 +115,24 @@ echo -e "\nInstalling Mosaic for "$LINUX_DISTRO"\n"
 # 2 - Install dependencies
 if [ "$LINUX_DISTRO" == "Ubuntu" ]; then
   apt update
-  apt install git curl ffmpeg wget build-essential net-tools -y
+  apt install git curl ffmpeg wget build-essential net-tools guile-2.2 guile-2.2-dev -y
 elif [ "$LINUX_DISTRO" == "Ubuntu WMWare" ]; then
   apt update
-  apt install git curl ffmpeg wget build-essential net-tools -y
+  apt install git curl ffmpeg wget build-essential net-tools guile-2.2 guile-2.2-dev -y
 elif [ "$LINUX_DISTRO" == "Linux Mint" ]; then
   apt update
-  apt install git curl ffmpeg wget build-essential net-tools -y
+  apt install git curl ffmpeg wget build-essential net-tools guile-2.2 guile-2.2-dev -y
 elif [ "$LINUX_DISTRO" == "Debian" ]; then
   apt update
-  apt install git curl ffmpeg wget build-essential net-tools rsync -y
+  apt install git curl ffmpeg wget build-essential net-tools rsync guile-2.2 guile-2.2-dev -y
 elif [ "$LINUX_DISTRO" == "Arch Linux" ]; then
   pacman -Syu
-  pacman -Syu base-devel git curl ffmpeg wget net-tools rsync nano
+  pacman -Syu base-devel git curl ffmpeg wget net-tools rsync nano guile-2.2 guile-2.2-dev
 elif [ "$LINUX_DISTRO" == "Fedora" ]; then
   dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
   dnf -y install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
   dnf update
-  dnf install nano make git curl ffmpeg wget net-tools --allowerasing
+  dnf install nano make git curl ffmpeg wget net-tools guile-2.2 guile-2.2-dev --allowerasing
 fi
 
 MOSAICVERSION="$( curl https://raw.githubusercontent.com/d3cod3/Mosaic/master/bin/data/release.txt )"
