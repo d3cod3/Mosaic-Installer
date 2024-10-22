@@ -16,7 +16,7 @@
 #
 #	  Mosaic auto compile/install script for multi linux boxes
 #
-#   Supported for now: Ubuntu, Ubuntu Studio, Linux Mint, Debian, Arch Linux, Fedora
+#   Supported for now: Ubuntu, Ubuntu Studio, Pop!_OS, Linux Mint, Debian, Arch Linux, Fedora
 #
 ###############################################################################
 
