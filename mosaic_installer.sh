@@ -63,8 +63,7 @@ MOSAICDESKTOPFILE=Mosaic.desktop
 LOCALUSERNAME="$( who | awk '{print $1}' )"
 INSTALLFOLDER=/opt
 OFFOLDERNAME=openFrameworks
-# HARDCODED OPENFRAMEWORKS RELEASE, using 0.11.2
-#OFRELURL=https://github.com/openframeworks/openFrameworks/releases/download/0.11.2/of_v0.11.2_linux64gcc6_release.tar.gz
+# HARDCODED OPENFRAMEWORKS RELEASE, using 0.12.0
 OFRELURL=https://www.d3cod3.org/downloads/of_v0.12.0_linux64gcc6_release_Mosaic.tar.gz
 OFRELFILENAME=of_v0.12.0_linux64gcc6_release_Mosaic.tar.gz
 OFRELORIGINALNAME=of_v0.12.0_linux64gcc6_release_Mosaic
@@ -116,23 +115,29 @@ echo -e "\nInstalling Mosaic for "$LINUX_DISTRO"\n"
 if [ "$LINUX_DISTRO" == "Ubuntu" ]; then
   apt update
   apt install git curl ffmpeg wget build-essential net-tools guile-2.2 guile-2.2-dev -y
+  apt install cmake libncurses5-dev libreadline-dev nettle-dev libgnutls28-dev libargon2-0-dev libmsgpack-dev libssl-dev libfmt-dev libjsoncpp-dev libhttp-parser-dev libasio-dev libcppunit-dev -y
 elif [ "$LINUX_DISTRO" == "Ubuntu WMWare" ]; then
   apt update
   apt install git curl ffmpeg wget build-essential net-tools guile-2.2 guile-2.2-dev -y
+  apt install cmake libncurses5-dev libreadline-dev nettle-dev libgnutls28-dev libargon2-0-dev libmsgpack-dev libssl-dev libfmt-dev libjsoncpp-dev libhttp-parser-dev libasio-dev libcppunit-dev -y
 elif [ "$LINUX_DISTRO" == "Linux Mint" ]; then
   apt update
   apt install git curl ffmpeg wget build-essential net-tools guile-2.2 guile-2.2-dev -y
+  apt install cmake libncurses5-dev libreadline-dev nettle-dev libgnutls28-dev libargon2-0-dev libmsgpack-dev libssl-dev libfmt-dev libjsoncpp-dev libhttp-parser-dev libasio-dev libcppunit-dev -y
 elif [ "$LINUX_DISTRO" == "Debian" ]; then
   apt update
   apt install git curl ffmpeg wget build-essential net-tools rsync guile-2.2 guile-2.2-dev -y
+  apt install cmake libncurses5-dev libreadline-dev nettle-dev libgnutls28-dev libargon2-0-dev libmsgpack-dev libssl-dev libfmt-dev libjsoncpp-dev libhttp-parser-dev libasio-dev libcppunit-dev -y
 elif [ "$LINUX_DISTRO" == "Arch Linux" ]; then
   pacman -Syu
   pacman -Syu base-devel git curl ffmpeg wget net-tools rsync nano guile-2.2 guile-2.2-dev
+  pacman -Syu cmake libncurses5-dev libreadline-dev nettle-dev libgnutls28-dev libargon2-0-dev libmsgpack-dev libssl-dev libfmt-dev libjsoncpp-dev libhttp-parser-dev libasio-dev libcppunit-dev
 elif [ "$LINUX_DISTRO" == "Fedora" ]; then
   dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
   dnf -y install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
   dnf update
   dnf install nano make git curl ffmpeg wget net-tools guile-2.2 guile-2.2-dev --allowerasing
+  dnf install readline-devel gnutls-devel msgpack-devel asio-devel libargon2-devel fmt-devel --allowerasing
 fi
 
 MOSAICVERSION="$( curl https://raw.githubusercontent.com/d3cod3/Mosaic/master/bin/data/release.txt )"
@@ -298,6 +303,14 @@ else
   git clone --branch=master https://github.com/d3cod3/ofxMtlMapping2D
 fi
 
+if [ -d ofxOpenDHT ]; then
+  echo -e "\nUpdating ofxOpenDHT addon..."
+  cd ofxOpenDHT && git checkout -- . && git pull && cd ..
+else
+  echo -e "\nCloning ofxOpenDHT addon..."
+  git clone --branch=master https://github.com/d3cod3/ofxOpenDHT
+fi
+
 if [ -d ofxPd ]; then
   echo -e "\nUpdating ofxPd addon..."
   cd ofxPd && git checkout -- . && git pull && cd ..
@@ -338,7 +351,16 @@ else
   git clone --branch=master https://github.com/d3cod3/ofxWarp
 fi
 
-# 5 - Clone and compile Mosaic
+# 5 - Compile & install opendht library
+cd $INSTALLFOLDER/$OFFOLDERNAME/addons/ofxOpenDHT
+git clone https://github.com/savoirfairelinux/opendht.git
+cd opendht
+mkdir build && cd build
+cmake -DOPENDHT_PYTHON=OFF -DCMAKE_INSTALL_PREFIX=/usr ..
+make -j4
+sudo make install
+
+# 6 - Clone and compile Mosaic
 cd $INSTALLFOLDER
 cd $OFFOLDERNAME/apps
 if [ -d d3cod3 ]; then
@@ -358,7 +380,7 @@ cd $INSTALLFOLDER/$OFFOLDERNAME/apps/d3cod3/Mosaic
 # compile
 make -j$NUMPU Release
 
-# 6 - Create a Mosaic.desktop file for desktop launchers
+# 7 - Create a Mosaic.desktop file for desktop launchers
 if [ ! -e /usr/share/applications/$MOSAICDESKTOPFILE ]; then
   cd $INSTALLFOLDER/$OFFOLDERNAME/apps/d3cod3/Mosaic/bin
   echo "[Desktop Entry]" > $MOSAICDESKTOPFILE
@@ -374,16 +396,16 @@ if [ ! -e /usr/share/applications/$MOSAICDESKTOPFILE ]; then
   cp $MOSAICDESKTOPFILE /usr/share/applications
 fi
 
-# 7 - Change the ownership of the entire openFrameworks folder to local user
+# 8 - Change the ownership of the entire openFrameworks folder to local user
 cd $INSTALLFOLDER
 chown $LOCALUSERNAME:$LOCALUSERNAME -R $OFFOLDERNAME/
 
-# 8 - Create Mosaic Example folder in ~/Documents
+# 9 - Create Mosaic Example folder in ~/Documents
 mkdir -p $USERHOME/Documents/Mosaic
 cp -R $INSTALLFOLDER/$OFFOLDERNAME/apps/d3cod3/Mosaic/bin/examples $USERHOME/Documents/Mosaic
 chown $LOCALUSERNAME:$LOCALUSERNAME -R $USERHOME/Documents/Mosaic
 
-# 9 - Mosaic installed message
+# 10 - Mosaic installed message
 echo -e "\nMosaic $MOSAICVERSION installed and ready to use."
 echo -e "\nYou will find it in your applications menu."
 
