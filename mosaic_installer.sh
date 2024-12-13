@@ -136,8 +136,8 @@ elif [ "$LINUX_DISTRO" == "Fedora" ]; then
   dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
   dnf -y install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
   dnf update
-  dnf install nano make git curl ffmpeg wget net-tools guile-2.2 guile-2.2-dev --allowerasing
-  dnf install readline-devel gnutls-devel msgpack-devel asio-devel libargon2-devel fmt-devel --allowerasing
+  dnf install nano make git curl ffmpeg wget net-tools guile22 guile22-devel --allowerasing
+  dnf install cppunit cppunit-devel readline-devel gnutls-devel msgpack-devel asio-devel libargon2-devel fmt-devel --allowerasing
 fi
 
 MOSAICVERSION="$( curl https://raw.githubusercontent.com/d3cod3/Mosaic/master/bin/data/release.txt )"
