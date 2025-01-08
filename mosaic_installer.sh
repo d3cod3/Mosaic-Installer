@@ -130,7 +130,7 @@ elif [ "$LINUX_DISTRO" == "Debian" ]; then
   apt install cmake libncurses5-dev libreadline-dev nettle-dev libgnutls28-dev libargon2-0-dev libmsgpack-dev libssl-dev libfmt-dev libjsoncpp-dev libhttp-parser-dev libasio-dev libcppunit-dev -y
 elif [ "$LINUX_DISTRO" == "Arch Linux" ]; then
   pacman -Syu
-  pacman -Syu base-devel git curl ffmpeg wget net-tools rsync nano guile-2.2 guile-2.2-dev
+  pacman -Syu base-devel git curl ffmpeg wget net-tools rsync nano guile2.2
   pacman -Syu cmake libncurses5-dev libreadline-dev nettle-dev libgnutls28-dev libargon2-0-dev libmsgpack-dev libssl-dev libfmt-dev libjsoncpp-dev libhttp-parser-dev libasio-dev libcppunit-dev
 elif [ "$LINUX_DISTRO" == "Fedora" ]; then
   dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
