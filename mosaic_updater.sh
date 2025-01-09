@@ -109,7 +109,7 @@ elif [ "$LINUX_DISTRO" == "Debian" ]; then
 elif [ "$LINUX_DISTRO" == "Arch Linux" ]; then
   pacman -Syu
   pacman -Syu base-devel git curl ffmpeg wget net-tools rsync nano guile2.2
-  pacman -Syu cmake readline7 nettle7 gnutls-git libar2 msgpack-c-git msgpack-cxx-git lib32-openssl-1.0 fmt10 jsoncpp-git http-parser-git asio-git cppunit
+  pacman -Syu cmake readline nettle gnutls argon2 msgpack-c msgpack-cxx openssl fmt jsoncpp http-parser asio cppunit
 elif [ "$LINUX_DISTRO" == "Fedora" ]; then
   dnf -y install https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
   dnf -y install https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
