@@ -188,6 +188,14 @@ else
   git clone --branch=master https://github.com/jeffcrouse/ofxJSON
 fi
 
+if [ -d ofxGLEditor ]; then
+  echo -e "\nUpdating ofxGLEditor addon..."
+  cd ofxGLEditor && git checkout -- . && git pull && cd ..
+else
+  echo -e "\nCloning ofxGLEditor addon..."
+  git clone --branch=master https://github.com/Akira-Hayasaka/ofxGLEditor
+fi
+
 if [ -d ofxImGui ]; then
   echo -e "\nUpdating ofxImGui addon..."
   cd ofxImGui && git checkout -- . && git pull && cd ..
@@ -259,6 +267,14 @@ if [ -d ofxPDSP ]; then
 else
   echo -e "\nCloning ofxPDSP addon..."
   git clone --branch=master https://github.com/d3cod3/ofxPDSP
+fi
+
+if [ -d ofxScheme ]; then
+  echo -e "\nUpdating ofxScheme addon..."
+  cd ofxScheme && git checkout -- . && git pull && cd ..
+else
+  echo -e "\nCloning ofxScheme addon..."
+  git clone --branch=master https://github.com/d3cod3/ofxScheme
 fi
 
 if [ -d ofxTimeline ]; then
