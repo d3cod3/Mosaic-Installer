@@ -140,14 +140,6 @@ else
   git clone --branch=master https://github.com/d3cod3/ofxBTrack
 fi
 
-if [ -d ofxChromaKeyShader ]; then
-  echo -e "\nUpdating ofxChromaKeyShader addon..."
-  cd ofxChromaKeyShader && git checkout -- . && git pull && cd ..
-else
-  echo -e "\nCloning ofxChromaKeyShader addon..."
-  git clone --branch=master https://github.com/d3cod3/ofxChromaKeyShader
-fi
-
 if [ -d ofxCv ]; then
   echo -e "\nUpdating ofxCv addon..."
   cd ofxCv && git checkout -- . && git pull && cd ..
@@ -178,14 +170,6 @@ if [ -d ofxFft ]; then
 else
   echo -e "\nCloning ofxFft addon..."
   git clone --branch=master https://github.com/kylemcdonald/ofxFft
-fi
-
-if [ -d ofxJSON ]; then
-  echo -e "\nUpdating ofxJSON addon..."
-  cd ofxJSON && git checkout -- . && git pull && cd ..
-else
-  echo -e "\nCloning ofxJSON addon..."
-  git clone --branch=master https://github.com/jeffcrouse/ofxJSON
 fi
 
 if [ -d ofxGLEditor ]; then
