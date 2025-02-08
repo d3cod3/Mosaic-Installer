@@ -351,6 +351,22 @@ else
   git clone --branch=master https://github.com/d3cod3/ofxWarp
 fi
 
+if [ -d ofxGLEditor ]; then
+  echo -e "\nUpdating ofxGLEditor addon..."
+  cd ofxWarp && git checkout -- . && git pull && cd ..
+else
+  echo -e "\nCloning ofxGLEditor addon..."
+  git clone --branch=master https://github.com/Akira-Hayasaka/ofxGLEditor
+fi
+
+if [ -d ofxScheme ]; then
+  echo -e "\nUpdating ofxScheme addon..."
+  cd ofxWarp && git checkout -- . && git pull && cd ..
+else
+  echo -e "\nCloning ofxScheme addon..."
+  git clone --branch=master https://github.com/d3cod3/ofxScheme
+fi
+
 # 5 - Compile & install opendht library
 cd $INSTALLFOLDER/$OFFOLDERNAME/addons/ofxOpenDHT
 git clone https://github.com/savoirfairelinux/opendht.git
