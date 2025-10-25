@@ -4,7 +4,7 @@
 # 	----------------------------------------------------------
 #   Mosaic | OF Visual Patching Developer Platform
 #
-#	  Copyright (c) 2024 Emanuele Mazza aka n3m3da
+#	  Copyright (c) 2025 Emanuele Mazza aka n3m3da
 #
 #	  Mosaic is distributed under the MIT License. This gives everyone the
 #   freedoms to use Mosaic in any context: commercial or non-commercial,
@@ -237,14 +237,6 @@ if [ -d ofxFFmpegRecorder ]; then
 else
   echo -e "\nCloning ofxFFmpegRecorder addon..."
   git clone --branch=master https://github.com/d3cod3/ofxFFmpegRecorder
-fi
-
-if [ -d ofxFft ]; then
-  echo -e "\nUpdating ofxFft addon..."
-  cd ofxFft && git checkout -- . && git pull && cd ..
-else
-  echo -e "\nCloning ofxFft addon..."
-  git clone --branch=master https://github.com/kylemcdonald/ofxFft
 fi
 
 if [ -d ofxGLEditor ]; then
